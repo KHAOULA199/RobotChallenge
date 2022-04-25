@@ -1,10 +1,12 @@
 package com.example.robotChallenge.worker;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.robotChallenge.exception.BadDataEntryException;
 import com.example.robotChallenge.exception.EmptyFileException;
@@ -13,30 +15,32 @@ import com.example.robotChallenge.factory.RoverFactory;
 import com.example.robotChallenge.model.Plateau;
 import com.example.robotChallenge.model.Rover;
 
-public class RoversFollowingInstructionsWorker implements IRoversFollowingInstructionsWorker{
+public class RoversFollowingInstructionsWorker implements IRoversFollowingInstructionsWorker {
     private RoverFactory roverFactory;
     private PlateauFactory plateauFactory;
     private static RoversFollowingInstructionsWorker roversFollowingInstructions;
 
-    
-    /** 
+    /**
      * @return RoversFollowingInstructionsWorker
-     * Using the design pattern singleton we make sure to have only one instance of 
-     * this worker that will simulate the whole sitation
+     *         Using the design pattern singleton we make sure to have only one
+     *         instance of
+     *         this worker that will simulate the whole sitation
      */
     public static RoversFollowingInstructionsWorker getInstance() {
         if (roversFollowingInstructions == null)
-            roversFollowingInstructions = new RoversFollowingInstructionsWorker(new RoverFactory(), new PlateauFactory());
+            roversFollowingInstructions = new RoversFollowingInstructionsWorker(new RoverFactory(),
+                    new PlateauFactory());
         return roversFollowingInstructions;
     }
 
-    
-    /** 
-     * Take the path to the file extract the data and dispatch it the simulation function
+    /**
+     * Take the path to the file extract the data and dispatch it the simulation
+     * function
+     * 
      * @param path path to the file that contains the day
-     * @throws EmptyFileException in case the file has no content
+     * @throws EmptyFileException    in case the file has no content
      * @throws BadDataEntryException in case the data that is put does not meet the
-     * required type
+     *                               required type
      */
     public void dispatchData(String path) throws EmptyFileException, BadDataEntryException {
         String content = readFile(path);
@@ -55,7 +59,10 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
         }
         List<Rover> rovers = roversFollowingInstructions.simulateInstructions(xPlateau, yPlateau, roversToCreate,
                 roversInStructions);
-        rovers.stream().forEach(x -> System.out.println(x));
+        String s = rovers.stream().map(Object::toString).collect(Collectors.joining("\n"));
+        writeResultToafile(s);
+        System.out.println("***************************Content of rover.txt*******************\n" + s);
+       
     }
 
     private RoversFollowingInstructionsWorker(RoverFactory roverFactory, PlateauFactory plateauFactory) {
@@ -63,14 +70,16 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
         this.plateauFactory = plateauFactory;
     }
 
-    
-    /** 
+    /**
      * 
-     * @param xPlateau x of the plateau
-     * @param yPlateau y of the plateau
-     * @param roversToCreate array of the strings that specify the positions of the rovers to create
-     * @param roversInStructions array of strings that specify the instruction corresponding to each rover
-     * @return List<Rover> the rovers after they were redirectionned and moved following the instructions
+     * @param xPlateau           x of the plateau
+     * @param yPlateau           y of the plateau
+     * @param roversToCreate     array of the strings that specify the positions of
+     *                           the rovers to create
+     * @param roversInStructions array of strings that specify the instruction
+     *                           corresponding to each rover
+     * @return List<Rover> the rovers after they were redirectionned and moved
+     *         following the instructions
      * @throws BadDataEntryException
      */
     public List<Rover> simulateInstructions(int xPlateau, int yPlateau, String[] roversToCreate,
@@ -88,12 +97,14 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
         return rovers;
     }
 
-    
-    /** 
+    /**
      * Applies the instructions on a single rover
-     * @param plateau the plateau that we will be working on
-     * @param rover the single rover that will be following the instructions
-     * @param roversInStructionsStr the instuctions STring that the rover will follow
+     * 
+     * @param plateau               the plateau that we will be working on
+     * @param rover                 the single rover that will be following the
+     *                              instructions
+     * @param roversInStructionsStr the instuctions STring that the rover will
+     *                              follow
      * @return Rover the rover after the instructions have been followed
      * @throws BadDataEntryException
      */
@@ -112,9 +123,9 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
         return rover;
     }
 
-    
-    /** 
+    /**
      * Returns the content of the file
+     * 
      * @param path the url string to where the simulation data is stored
      * @return String the content of the file
      * @throws EmptyFileException in case the file is empty
@@ -127,9 +138,10 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
         }
     }
 
-    
-    /** 
-     * Check if the length of the content is enough to be splitted following a certain pattern
+    /**
+     * Check if the length of the content is enough to be splitted following a
+     * certain pattern
+     * 
      * @param s the string to be splitted
      * @param i the pattern
      * @return String[]
@@ -142,9 +154,9 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
         throw new BadDataEntryException();
     }
 
-    
-    /** 
+    /**
      * Checks if the length is appropriate to get a string at a certain string index
+     * 
      * @param str
      * @param i
      * @return String
@@ -157,9 +169,10 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
 
     }
 
-    
-    /** 
-     * Converts a string to an integer and personalize the exception in case there is an issue
+    /**
+     * Converts a string to an integer and personalize the exception in case there
+     * is an issue
+     * 
      * @param str
      * @param i
      * @return int
@@ -172,5 +185,19 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
             throw new BadDataEntryException();
         }
 
+    }
+    
+    /** 
+     * Creates a file and writes the string in it.
+     * @param s
+     */
+    private void writeResultToafile(String s){
+        try {
+            FileWriter myWriter = new FileWriter("rover.txt");
+            myWriter.write(s);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("Issue happened when putting the data in the resulting file");
+        }
     }
 }

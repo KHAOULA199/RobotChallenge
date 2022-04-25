@@ -12,13 +12,12 @@ public class RobotChallengeApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String path = args[0];
 		try {
-			if (path == null || path.trim().isEmpty()) {
+			if (args[0] == null || args[0].trim().isEmpty()) {
 				System.out.println("You need to specify a path!");
 				return;
 			} else {
-				roversFollowingInstructions.dispatchData(path);
+				roversFollowingInstructions.dispatchData(args[0]);
 			}
 		} catch (EmptyFileException | BadDataEntryException e) {
 			System.out.println(e.getMessage());

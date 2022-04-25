@@ -1,21 +1,14 @@
 package com.example.robotChallenge.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public final class Plateau {
-    final private int x;
-    final private int y;
-    private static Plateau plateau;
-
-    private Plateau(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-    public static Plateau getPlateau(int x, int y){
-        if (plateau == null)
-            plateau = new Plateau( x, y);
-        return plateau;
-    }
+    private int x;
+    private int y;
 
 }

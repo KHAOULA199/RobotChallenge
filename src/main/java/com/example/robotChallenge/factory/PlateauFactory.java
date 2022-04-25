@@ -15,6 +15,6 @@ public class PlateauFactory implements IPlateauFactory{
     public Plateau createPlateau(int x, int y) throws BadDataEntryException {
         if (x < 0 || y < 0)
             throw new BadDataEntryException();
-        return Plateau.getPlateau(x, y);
+        return new Plateau(x, y);
     }
 }
