@@ -61,4 +61,4 @@ rover.txt
 Displaying rover.txt.
 
 ## How to run it
-java -jar rover.jar input.txt
+ 	java -jar rover.jar input.txt
