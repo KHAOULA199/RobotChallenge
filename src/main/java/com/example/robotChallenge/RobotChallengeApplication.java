@@ -2,10 +2,11 @@ package com.example.robotChallenge;
 
 import com.example.robotChallenge.exception.BadDataEntryException;
 import com.example.robotChallenge.exception.EmptyFileException;
+import com.example.robotChallenge.worker.IRoversFollowingInstructionsWorker;
 import com.example.robotChallenge.worker.RoversFollowingInstructionsWorker;
 
 public class RobotChallengeApplication {
-	private static RoversFollowingInstructionsWorker roversFollowingInstructions = RoversFollowingInstructionsWorker.getInstance();
+	private static IRoversFollowingInstructionsWorker roversFollowingInstructions = RoversFollowingInstructionsWorker.getInstance();
 
 	
 	/** 

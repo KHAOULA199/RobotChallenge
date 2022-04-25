@@ -18,7 +18,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class RoverFactoryTest {
-    RoverFactory roverFactory;
+    IRoverFactory roverFactory;
     @BeforeEach
     public void before() {
         this.roverFactory = new RoverFactory();
@@ -43,7 +43,7 @@ public class RoverFactoryTest {
     @Test
     public void validateMovementSuccessfulTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
-        PlateauFactory plateauFactory = new PlateauFactory();
+        IPlateauFactory plateauFactory = new PlateauFactory();
         Plateau plateau = plateauFactory.createPlateau(5, 5);
         assertTrue(roverFactory.validateMovement(rover, plateau));
 
@@ -52,7 +52,7 @@ public class RoverFactoryTest {
     @Test
     public void validateMovementFailingTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
-        PlateauFactory plateauFactory = new PlateauFactory();
+        IPlateauFactory plateauFactory = new PlateauFactory();
         Plateau plateau = plateauFactory.createPlateau(1, 1);
         assertFalse(roverFactory.validateMovement(rover, plateau));
     }

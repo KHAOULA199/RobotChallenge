@@ -10,14 +10,16 @@ import java.util.stream.Collectors;
 
 import com.example.robotChallenge.exception.BadDataEntryException;
 import com.example.robotChallenge.exception.EmptyFileException;
+import com.example.robotChallenge.factory.IPlateauFactory;
+import com.example.robotChallenge.factory.IRoverFactory;
 import com.example.robotChallenge.factory.PlateauFactory;
 import com.example.robotChallenge.factory.RoverFactory;
 import com.example.robotChallenge.model.Plateau;
 import com.example.robotChallenge.model.Rover;
 
 public class RoversFollowingInstructionsWorker implements IRoversFollowingInstructionsWorker {
-    private RoverFactory roverFactory;
-    private PlateauFactory plateauFactory;
+    private IRoverFactory roverFactory;
+    private IPlateauFactory plateauFactory;
     private static RoversFollowingInstructionsWorker roversFollowingInstructions;
 
     /**
@@ -65,7 +67,7 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
        
     }
 
-    private RoversFollowingInstructionsWorker(RoverFactory roverFactory, PlateauFactory plateauFactory) {
+    private RoversFollowingInstructionsWorker(IRoverFactory roverFactory, IPlateauFactory plateauFactory) {
         this.roverFactory = roverFactory;
         this.plateauFactory = plateauFactory;
     }
