@@ -21,14 +21,14 @@ public class PlateauFactoryTest {
         this.plateauFactory = new PlateauFactory();
     }
 
-    @DisplayName("Create Plateau with positive coordinates")
+    @DisplayName("Create Plateau with positive coordinates test")
     @Test
     public void createPlateauSuccessfulTest() throws BadDataEntryException {
         Plateau plateau = this.plateauFactory.createPlateau(5, 5);
         assertTrue(plateau.getX() == 5 && plateau.getY() == 5);
     }
 
-    @DisplayName("Create Plateau with negative coordinates")
+    @DisplayName("Create Plateau with negative coordinates test")
     @Test
     public void createPlateauFailingTest() throws BadDataEntryException {
         assertThrows(BadDataEntryException.class, () -> this.plateauFactory.createPlateau(-1, 2));

@@ -11,7 +11,6 @@ import com.example.robotChallenge.model.Plateau;
 import com.example.robotChallenge.model.Rover;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -24,23 +23,23 @@ public class RoverFactoryTest {
     public void before() {
         this.roverFactory = new RoverFactory();
     }
-    @DisplayName("Create Rover with positive coordinates")
+    @DisplayName("Create a rover with positive coordinates test")
     @Test
     public void createRoverSuccessfulTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
         assertTrue(rover.getX()==1 && rover.getY() ==2 && rover.getDirection().equals(Direction.NORTH));
     }
-    @DisplayName("Create Rover with negative coordinates")
+    @DisplayName("Create a rover with negative coordinates test")
     @Test
     public void createRoverFailingTest() throws BadDataEntryException{
         assertThrows(BadDataEntryException.class, ()->this.roverFactory.createRover(-1, 2, "N"));
     }
-    @DisplayName("Create Rover with a bad direction")
+    @DisplayName("Create a rover with a bad direction test")
     @Test
     public void createRoverFailingTest2() throws BadDataEntryException{
         assertThrows(BadDataEntryException.class, ()->this.roverFactory.createRover(1, 2, "K"));
     }
-    @DisplayName("validate a Rover movement")
+    @DisplayName("validate a rover movement test")
     @Test
     public void validateMovementSuccessfulTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
@@ -49,23 +48,22 @@ public class RoverFactoryTest {
         assertTrue(roverFactory.validateMovement(rover, plateau));
 
     }
-    @DisplayName("validate a wrong Rover movement")
+    @DisplayName("validate a wrong Rover movement test")
     @Test
-    @Disabled
     public void validateMovementFailingTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
         PlateauFactory plateauFactory = new PlateauFactory();
         Plateau plateau = plateauFactory.createPlateau(1, 1);
         assertFalse(roverFactory.validateMovement(rover, plateau));
     }
-    @DisplayName("advance a Rover")
+    @DisplayName("Advance a Rover test")
     @Test
     public void advanceRoverSuccessfulTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
         assertEquals(roverFactory.advance(rover).getY(),  3);
 
     }
-    @DisplayName("rotate a Rover")
+    @DisplayName("Rotate a Rover test")
     @Test
     public void rotateRoverSuccessfulTest() throws BadDataEntryException{
         Rover rover = this.roverFactory.createRover(1, 2, "N");
