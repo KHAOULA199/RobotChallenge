@@ -90,10 +90,11 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
 
     
     /** 
+     * Applies the instructions on a single rover
      * @param plateau the plateau that we will be working on
-     * @param rover
-     * @param roversInStructionsStr
-     * @return Rover
+     * @param rover the single rover that will be following the instructions
+     * @param roversInStructionsStr the instuctions STring that the rover will follow
+     * @return Rover the rover after the instructions have been followed
      * @throws BadDataEntryException
      */
     public Rover followInstructions(Plateau plateau, Rover rover, String roversInStructionsStr)
@@ -113,9 +114,10 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
 
     
     /** 
-     * @param path
-     * @return String
-     * @throws EmptyFileException
+     * Returns the content of the file
+     * @param path the url string to where the simulation data is stored
+     * @return String the content of the file
+     * @throws EmptyFileException in case the file is empty
      */
     private String readFile(String path) throws EmptyFileException {
         try {
@@ -127,8 +129,9 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
 
     
     /** 
-     * @param s
-     * @param i
+     * Check if the length of the content is enough to be splitted following a certain pattern
+     * @param s the string to be splitted
+     * @param i the pattern
      * @return String[]
      * @throws BadDataEntryException
      */
@@ -141,6 +144,7 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
 
     
     /** 
+     * Checks if the length is appropriate to get a string at a certain string index
      * @param str
      * @param i
      * @return String
@@ -155,6 +159,7 @@ public class RoversFollowingInstructionsWorker implements IRoversFollowingInstru
 
     
     /** 
+     * Converts a string to an integer and personalize the exception in case there is an issue
      * @param str
      * @param i
      * @return int

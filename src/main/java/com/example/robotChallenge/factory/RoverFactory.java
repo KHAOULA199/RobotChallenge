@@ -8,6 +8,7 @@ import com.example.robotChallenge.model.Rover;
 public class RoverFactory implements IRoverFactory{
     
     /** 
+     * Creates a rover 
      * @param x
      * @param y
      * @param directionStr
@@ -23,6 +24,7 @@ public class RoverFactory implements IRoverFactory{
 
     
     /** 
+     * Checks if the movement of the rover will keep it in the perimeter of the plateau or not
      * @param rover
      * @param plateau
      * @return Boolean
@@ -37,6 +39,7 @@ public class RoverFactory implements IRoverFactory{
     }
     
     /** 
+     * Move the rover by one step based on the rover direction
      * @param rover
      * @return Rover
      */
@@ -59,6 +62,7 @@ public class RoverFactory implements IRoverFactory{
     }
     
     /** 
+     * Rotates the rover to a certain direction.
      * @param rover
      * @param rotationDirectionString
      * @return Rover

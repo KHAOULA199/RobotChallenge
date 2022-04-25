@@ -6,6 +6,7 @@ import com.example.robotChallenge.model.Plateau;
 public class PlateauFactory implements IPlateauFactory{
     
     /** 
+     * Creates a plateau using x and y
      * @param x
      * @param y
      * @return Plateau
